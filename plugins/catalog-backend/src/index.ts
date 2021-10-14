@@ -26,4 +26,8 @@ export * from './legacy';
 export * from './search';
 export * from './util';
 export * from './next';
-export { conditions, createConditions, extendRulesWith } from './permissions';
+export {
+  conditions,
+  createConditions,
+  registerPermissionRule,
+} from './permissions';

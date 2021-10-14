@@ -14,13 +14,19 @@
  * limitations under the License.
  */
 
-import { CatalogBuilder } from '@backstage/plugin-catalog-backend';
+import {
+  CatalogBuilder,
+  registerPermissionRule,
+} from '@backstage/plugin-catalog-backend';
+import { isComponentType } from '@backstage/plugin-permission-handler-simple';
 import { Router } from 'express';
 import { PluginEnvironment } from '../types';
 
 export default async function createPlugin(
   env: PluginEnvironment,
 ): Promise<Router> {
+  registerPermissionRule(isComponentType);
+
   const builder = await CatalogBuilder.create(env);
   const { processingEngine, router } = await builder.build();
   await processingEngine.start();
